@@ -12,15 +12,40 @@ import Classes.Personagem;
  *
  * @author Lucas
  */
-public class TelaSelecionar extends javax.swing.JFrame {
-    Jogador j[] = new Jogador[1];
-    Personagem p [] = new Personagem[1];
+public class TelaSelecionar2 extends javax.swing.JFrame {
+
+    Personagem p[] = new Personagem[2];
+    Jogador j[] = new Jogador[2];
+
     /**
      * Creates new form TelaSelecionar
      */
-    public TelaSelecionar() {
+    public TelaSelecionar2() {
+
+        p[0] = Personagem.getInstance();
+        j[0] = Jogador.getInstance();
+
         initComponents();
         btnProximo.setEnabled(false);
+        //Desabilitar o personagem selecionado pelo jogador número 1
+        String pers1 = p[0].getNome();
+        switch (pers1) {
+            case "Blinky":
+                rdbBlinky.setEnabled(false);
+                break;
+            case "Clyde":
+                rdbClyde.setEnabled(false);
+                break;
+            case "Pinky":
+                rdbPinky.setEnabled(false);
+                break;
+            case "Pac":
+                rdbPac.setEnabled(false);
+                break;
+            case "Inky":
+                rdbInky.setEnabled(false);
+                break;
+        }
     }
 
     /**
@@ -75,7 +100,7 @@ public class TelaSelecionar extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Antes de começarmos a jogar, por favor insira os dados do jogador 1:");
+        jLabel1.setText("Antes de começarmos a jogar, por favor insira os dados do jogador 2:");
 
         txtNumJogador.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -343,42 +368,41 @@ public class TelaSelecionar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-        j[0] =  Jogador.CreateInstance();
-        p[0] =  Personagem.CreateInstance();
+        j[1] = Jogador.CreateInstance();
+        p[1] = Personagem.CreateInstance();
         String apelido = txtApelido.getText();
         String email = txtEmail.getText();
         String nome = txtNome.getText();
         String numero = txtNumero.getText();
-        j[0].setApelido(apelido);
-        j[0].setEmail(email);
-        j[0].setNome(nome);
-        j[0].setTelefone(numero);
-        if(rdbBlinky.isSelected()){
+        j[1].setApelido(apelido);
+        j[1].setEmail(email);
+        j[1].setNome(nome);
+        j[1].setTelefone(numero);
+        if (rdbBlinky.isSelected()) {
             String personagem = "Blinky";
-             p[0].setNome(personagem);
+            p[1].setNome(personagem);
         }
-        if(rdbClyde.isSelected()){
+        if (rdbClyde.isSelected()) {
             String personagem = "Clyde";
-             p[0].setNome(personagem);
+            p[1].setNome(personagem);
         }
-         if(rdbPinky.isSelected()){
+        if (rdbPinky.isSelected()) {
             String personagem = "Pinky";
-             p[0].setNome(personagem);
+            p[1].setNome(personagem);
         }
-          if(rdbPac.isSelected()){
+        if (rdbPac.isSelected()) {
             String personagem = "Pac";
-             p[0].setNome(personagem);
+            p[1].setNome(personagem);
         }
-        if(rdbInky.isSelected()){
+        if (rdbInky.isSelected()) {
             String personagem = "Inky";
-             p[0].setNome(personagem);
+            p[1].setNome(personagem);
         }
-         //Setar vida do personagem
-          p[0].setVida(100);
-          p[0].setJ(j[0]);
-          
-          new TelaSelecionar2().setVisible(true);
-          dispose();
+        //Setar vida do personagem
+        p[1].setVida(100);
+        p[1].setJ(j[1]);
+
+
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void txtNomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeMouseExited
@@ -394,7 +418,7 @@ public class TelaSelecionar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroMouseExited
 
     private void txtEmailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMouseExited
-       ValidarCampos();
+        ValidarCampos();
     }//GEN-LAST:event_txtEmailMouseExited
 
     /**
@@ -415,20 +439,21 @@ public class TelaSelecionar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaSelecionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaSelecionar2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaSelecionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaSelecionar2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaSelecionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaSelecionar2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaSelecionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaSelecionar2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaSelecionar().setVisible(true);
+                new TelaSelecionar2().setVisible(true);
             }
         });
     }

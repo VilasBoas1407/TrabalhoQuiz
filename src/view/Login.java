@@ -152,11 +152,7 @@ public class Login extends javax.swing.JFrame {
             Conexao objCon = new Conexao();
 
         try {
-            objCon.openConnectionMySql();
-            //objCon.stmt = objCon.con.createStatement();
-            String SQL = "SELECT * from TB_USUARIO";
-            //objCon.rs = objCon.stmt.executeQuery(SQL);
-            
+                     
             String usuario = "Admin";
             String senha = "123456";
 
@@ -170,7 +166,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Acesso negado!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados!");
+            JOptionPane.showMessageDialog(null, "Erro ao validar seu acesso!");
         }
 
 
