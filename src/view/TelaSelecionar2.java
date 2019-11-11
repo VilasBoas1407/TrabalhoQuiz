@@ -90,9 +90,9 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
         rdbInky = new javax.swing.JRadioButton();
         rdbPac = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        JMPrincipal = new javax.swing.JMenu();
+        jMSobre = new javax.swing.JMenu();
+        jMSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jogador 1");
@@ -328,17 +328,44 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
                         .addGap(63, 63, 63))))
         );
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/house (1).png"))); // NOI18N
-        jMenu1.setText("Principal");
-        jMenuBar1.add(jMenu1);
+        JMPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/house (1).png"))); // NOI18N
+        JMPrincipal.setText("Principal");
+        JMPrincipal.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                JMPrincipalMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(JMPrincipal);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
+        jMSobre.setText("Sobre");
+        jMSobre.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMSobreMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(jMSobre);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/power.png"))); // NOI18N
-        jMenu3.setText("Sair");
-        jMenuBar1.add(jMenu3);
+        jMSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/power.png"))); // NOI18N
+        jMSair.setText("Sair");
+        jMSair.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMSairMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(jMSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -378,6 +405,7 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
         j[1].setEmail(email);
         j[1].setNome(nome);
         j[1].setTelefone(numero);
+        //Verificar qual personagem foi escolhido
         if (rdbBlinky.isSelected()) {
             String personagem = "Blinky";
             p[1].setNome(personagem);
@@ -401,7 +429,8 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
         //Setar vida do personagem
         p[1].setVida(100);
         p[1].setJ(j[1]);
-
+        new TelaInicio().setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_btnProximoActionPerformed
 
@@ -420,6 +449,21 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
     private void txtEmailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMouseExited
         ValidarCampos();
     }//GEN-LAST:event_txtEmailMouseExited
+
+    private void JMPrincipalMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_JMPrincipalMenuSelected
+        new TelaPrincipal().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_JMPrincipalMenuSelected
+
+    private void jMSobreMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMSobreMenuSelected
+       new TelaSobre().setVisible(true);
+       dispose();
+    }//GEN-LAST:event_jMSobreMenuSelected
+
+    private void jMSairMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMSairMenuSelected
+        //Encerrar o sistema
+        System.exit(0);
+    }//GEN-LAST:event_jMSairMenuSelected
 
     /**
      * @param args the command line arguments
@@ -459,6 +503,7 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu JMPrincipal;
     private javax.swing.ButtonGroup btGPersonagens;
     private javax.swing.JButton btnProximo;
     private javax.swing.JLabel inky;
@@ -472,9 +517,8 @@ public class TelaSelecionar2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMSair;
+    private javax.swing.JMenu jMSobre;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel pac;
