@@ -47,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+7));
         jLabel2.setText("Login:");
@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame {
             String senha = "123456";
 
             if (txtLogin.getText().equals(usuario) && txtSenha.getText().equals(senha)) {
-                JOptionPane.showMessageDialog(null, "Bem Vindo!");
+                JOptionPane.showMessageDialog(null, "Bem-Vindo!");
                 TelaPrincipal TP = new TelaPrincipal();
                 TP.setVisible(true);
                 dispose();

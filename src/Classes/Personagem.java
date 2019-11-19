@@ -10,22 +10,32 @@ package Classes;
  * @author Lucas
  */
 public class Personagem {
-    Jogador j =  Jogador.getInstance();
+
+    Jogador j = Jogador.getInstance();
     String nome;
     double vida;
-    private static Personagem instance2;
+    private static Personagem personagem, personagem2;
 
     // Construtor privado (suprime o construtor público padrão).
-    private Personagem() {}
+    private Personagem() {
+    }
 
     // Método público estático de acesso único ao objeto!
     public static Personagem getInstance() {
-        return instance2;
+        return personagem;
     }
-    
-    public static Personagem CreateInstance(){
-        return instance2 = new Personagem();
+    // Retorna dados do personagem do Jogador 2
+    public static Personagem getInstance2() {
+        return personagem2;
     }
+
+    public static Personagem CreateInstance() {
+        if(personagem == null)
+            return personagem = new Personagem();
+        else
+            return personagem2 = new Personagem();
+    }
+
     public Jogador getJ() {
         return j;
     }
@@ -49,5 +59,5 @@ public class Personagem {
     public void setVida(double vida) {
         this.vida = vida;
     }
-    
+
 }

@@ -15,18 +15,32 @@ import javax.swing.text.MaskFormatter;
 public class Jogador {
 
     String nome, apelido, email, recompensa, telefone, personagem;
-    private static Jogador instance;
+    boolean primeiro; // Seta true ou false para saber quem inicio o jogo
+
+    private static Jogador instance, instancej2;
 
     // Construtor privado (suprime o construtor público padrão).
-    private Jogador() {}
+    private Jogador() {
+    }
 
     // Método público estático de acesso único ao objeto!
     public static Jogador getInstance() {
         return instance;
     }
-    public static Jogador CreateInstance(){
-        return instance = new Jogador();    
+
+    //Pegando valores do jogador dois
+    public static Jogador getInstance2() {
+        return instancej2;
     }
+
+    public static Jogador CreateInstance() {
+        if (instance == null) {
+            return instance = new Jogador();
+        } else {
+            return instancej2 = new Jogador();
+        }
+    }
+
     public String getRecompensa() {
         return recompensa;
     }
@@ -73,5 +87,13 @@ public class Jogador {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public boolean GetPrimeiro() {
+        return primeiro;
+    }
+
+    public void setPrimeiro(boolean primeiro) {
+        this.primeiro = primeiro;
     }
 }
