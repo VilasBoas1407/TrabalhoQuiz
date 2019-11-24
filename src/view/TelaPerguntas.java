@@ -70,6 +70,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Jogador 2:");
 
+        txtPontoJ2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Vez de ");
 
