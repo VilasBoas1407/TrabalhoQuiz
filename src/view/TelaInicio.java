@@ -136,7 +136,7 @@ public class TelaInicio extends javax.swing.JFrame {
                                 .addComponent(jRImpar))
                             .addComponent(jLabel1)
                             .addComponent(jLabel5))
-                        .addGap(323, 323, 323))
+                        .addGap(305, 305, 305))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -251,6 +251,8 @@ public class TelaInicio extends javax.swing.JFrame {
 
     private void btnComecarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComecarActionPerformed
 
+        
+        
         Random gerador = new Random();
         int num1 = gerador.nextInt(11); // Número jogador 1 ,para realizar o par ou impar.
         int num2 = gerador.nextInt(11); // Número jogador 2 ,para realizar o par ou impar.

@@ -1,0 +1,1 @@
+Na programa‡Æo orientada a objetos, h  um mecanismo que permite definir modificadores de acesso. Quando se define um atributo de uma classe com o modificador de acesso privado, significa que:;O acesso … classe ‚ privado.;O atributo ‚ acess¡vel a um programa que tenha uma referˆncia a um objeto da classe;A classe ‚ abstrata.;A atributo ‚ acess¡vel somente aos m‚todos da classe.;A
