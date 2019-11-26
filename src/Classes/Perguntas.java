@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.nio.ByteBuffer;
+
 /**
  *
  * @author Lucas
