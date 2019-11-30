@@ -308,7 +308,12 @@ public class TelaSelecionar extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
-        jMenu2.setText("Edit");
+        jMenu2.setText("Sobre");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/power.png"))); // NOI18N
@@ -382,20 +387,26 @@ public class TelaSelecionar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void txtNomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeMouseExited
-        ValidarCampos();
+        ValidarCampos(); // Validando se os campos estão preenchidos, toda vez que o curso sair do input
     }//GEN-LAST:event_txtNomeMouseExited
 
     private void txtApelidoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApelidoMouseExited
-        ValidarCampos();
+        ValidarCampos(); // Validando se os campos estão preenchidos, toda vez que o curso sair do input
     }//GEN-LAST:event_txtApelidoMouseExited
 
     private void txtNumeroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNumeroMouseExited
-        ValidarCampos();
+        ValidarCampos(); // Validando se os campos estão preenchidos, toda vez que o curso sair do input
     }//GEN-LAST:event_txtNumeroMouseExited
 
     private void txtEmailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMouseExited
-       ValidarCampos();
+       ValidarCampos(); // Validando se os campos estão preenchidos, toda vez que o curso sair do input
     }//GEN-LAST:event_txtEmailMouseExited
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+      TelaSobre TS = new TelaSobre(); // Redirecionando para tela Sobre
+      TS.setVisible(true);
+      dispose();
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments

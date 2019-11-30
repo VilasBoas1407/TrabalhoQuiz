@@ -251,8 +251,6 @@ public class TelaInicio extends javax.swing.JFrame {
 
     private void btnComecarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComecarActionPerformed
 
-        
-        
         Random gerador = new Random();
         int num1 = gerador.nextInt(11); // Número jogador 1 ,para realizar o par ou impar.
         int num2 = gerador.nextInt(11); // Número jogador 2 ,para realizar o par ou impar.
@@ -262,22 +260,31 @@ public class TelaInicio extends javax.swing.JFrame {
         if (res == 0) {
             if (jRPar.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Jogador 1 ganhou!");
-                j[0].setPrimeiro(true);
-                j[1].setPrimeiro(false);
+                j[0].setJogadorRodada(true);
+                j[1].setJogadorRodada(false);
+                j[0].setRodada(1);
+                j[1].setRodada(1);
             } else {
                 JOptionPane.showMessageDialog(null, "Jogador 2 ganhou!");
-                j[0].setPrimeiro(false);
-                j[1].setPrimeiro(true);
+                j[0].setJogadorRodada(false);
+                j[1].setJogadorRodada(true);
+                j[0].setRodada(1);
+                j[1].setRodada(1);
             }
         } else {
             if (jRImpar.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Jogador 1 ganhou!");
-                j[0].setPrimeiro(true);
-                j[1].setPrimeiro(false);
+                j[0].setJogadorRodada(true);
+                j[1].setJogadorRodada(false);
+                j[0].setRodada(1);
+                j[1].setRodada(1);
             } else {
                 JOptionPane.showMessageDialog(null, "Jogador 2 ganhou!");
-                j[0].setPrimeiro(false);
-                j[1].setPrimeiro(true);
+                j[0].setJogadorRodada(false);
+                j[1].setJogadorRodada(true);
+                j[0].setRodada(1);
+                j[1].setRodada(1);
+
             }
 
         }

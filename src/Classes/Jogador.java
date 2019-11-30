@@ -14,8 +14,18 @@ import javax.swing.text.MaskFormatter;
  */
 public class Jogador {
 
-    String nome, apelido, email, recompensa, telefone, personagem;
-    boolean primeiro; // Seta true ou false para saber quem inicio o jogo
+    String nome, apelido, email, telefone, personagem;
+    double recompensa;
+    int rodada;
+    boolean jogador_da_rodada; // Seta true ou false para saber quem inicio o jogo
+
+    public int getRodada() {
+        return rodada;
+    }
+    //Contador de rodadas, utilizado para aumentar a recompensa
+    public void setRodada(int rodada) {
+        this.rodada = rodada;
+    }
 
     private static Jogador instance, instancej2;
 
@@ -41,11 +51,11 @@ public class Jogador {
         }
     }
 
-    public String getRecompensa() {
+    public double getRecompensa() {
         return recompensa;
     }
 
-    public void setRecompensa(String recompensa) {
+    public void setRecompensa(double recompensa) {
         this.recompensa = recompensa;
     }
 
@@ -89,11 +99,11 @@ public class Jogador {
         this.telefone = telefone;
     }
 
-    public boolean GetPrimeiro() {
-        return primeiro;
+    public boolean GetJogadorRodada() {
+        return jogador_da_rodada;
     }
 
-    public void setPrimeiro(boolean primeiro) {
-        this.primeiro = primeiro;
+    public void setJogadorRodada(boolean jogador_da_rodada) {
+        this.jogador_da_rodada = jogador_da_rodada;
     }
 }

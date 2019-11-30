@@ -1,9 +1,12 @@
 
 package view;
 
+import Classes.Usuario;
+import dao.UsuarioDAO;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -33,6 +36,9 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+7));
         jLabel2.setText("Login:");
@@ -134,38 +140,26 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public static String ValidarLogin(String caminho_arquivo,String login, String senha) throws IOException {
+    public static String ValidarLogin(String login, String senha) throws IOException {
 
-        FileReader arq = new FileReader(caminho_arquivo);
-        BufferedReader lerArq = new BufferedReader(arq);
-        boolean valido = false;
-        while (valido != true) {
-            String array[] = new String[2];
-            String linha = lerArq.readLine();
-            array = linha.split(";");
-            if (array[1].equals(login) && array[2].equals(senha)) {
-                valido = true;
-                String nome = array[0];
-                return nome;
-            } else {
-                valido = false;
-             }
-        }
-
-        return null;
-
+        Usuario user = new Usuario();
+        UsuarioDAO US = new UsuarioDAO();
+        user = US.VerificaLogin(login, senha);
+        if(user != null)
+            return user.getNome();
+        else
+            return null;
     }
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         try {
-            //Pega o diretório do projeto
-            String caminho_arquivo = System.getProperty("user.dir") + "/user.csv";
+           
             //Pega valores digitados na tela
             String login = txtLogin.getText();
             String senha = txtSenha.getText();
             //Função para validar login
-            String validar = ValidarLogin(caminho_arquivo,login, senha);
+            String validar = ValidarLogin(login, senha);
 
             if (validar != null) {
                 JOptionPane.showMessageDialog(null, "Bem-Vindo, " + validar);
@@ -174,10 +168,13 @@ public class Login extends javax.swing.JFrame {
                 dispose();
 
             } else {
-                JOptionPane.showMessageDialog(null, "Acesso negado!");
+                 TelaPrincipal TP = new TelaPrincipal();
+                TP.setVisible(true);
+                dispose();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao validar seu acesso!");
+            
+            JOptionPane.showMessageDialog(null, "Erro ao validar seu acesso!","Erro", JOptionPane.ERROR_MESSAGE);
         }
 
 

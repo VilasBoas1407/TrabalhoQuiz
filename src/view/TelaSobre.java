@@ -73,23 +73,23 @@ public class TelaSobre extends javax.swing.JFrame {
 
         jLabel3.setText("119119592");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("119122324   -");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setText("119122204   -");
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setText("119214091   -");
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setText("119124309   -");
 
         jLabel8.setText("Lucas Vilas Boas Lage");
 
-        jLabel9.setText("Mariana Abreu");
+        jLabel9.setText("Mariana Santos Abreu");
 
-        jLabel10.setText("Eve Pavie");
+        jLabel10.setText("Eve Clair Ulrik Pavie");
 
-        jLabel11.setText("Fabiana Quellot");
+        jLabel11.setText("Fabiana Quelott Lopes Cançado");
 
-        jLabel12.setText("Josúe ");
+        jLabel12.setText("Fernando Lucas Souza Lopes");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel13.setText("Matéria:");
@@ -148,7 +148,7 @@ public class TelaSobre extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addGap(88, 135, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -186,13 +186,10 @@ public class TelaSobre extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jLabel6))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel7)))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                 .addComponent(jLabel2))
         );
