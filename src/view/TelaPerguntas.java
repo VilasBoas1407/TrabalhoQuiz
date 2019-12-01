@@ -273,8 +273,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPontosJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtPontosJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtPersonagem))
@@ -320,7 +320,6 @@ public class TelaPerguntas extends javax.swing.JFrame {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(txtEnun2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(205, 205, 205))))
         );
@@ -378,10 +377,66 @@ public class TelaPerguntas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Parabéns,você acertou!!", "Parabéns", JOptionPane.INFORMATION_MESSAGE);
             if (j[0].GetJogadorRodada() == true) {
                 double recompensa = j[0].getRecompensa();
+                int rodada = j[0].getRodada();
+                if (recompensa == 0) {
+                    recompensa = 10;
+                }
+                recompensa = recompensa + (0.5 * rodada);
                 j[0].setRecompensa(recompensa);
+                rodada += 1;
+                j[0].setRodada(rodada);
+                j[1].setRodada(rodada);
+            } else {
+                double recompensa = j[1].getRecompensa();
+                int rodada = j[1].getRodada();
+                if (recompensa == 0) {
+                    recompensa = 10;
+                }
+                recompensa = recompensa + (0.5 * rodada);
+                j[1].setRecompensa(recompensa);
+                rodada += 1;
+                j[0].setRodada(rodada);
+                j[1].setRodada(rodada);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Você errou seu cocô", "Parabéns", JOptionPane.ERROR_MESSAGE);
+            if (j[0].GetJogadorRodada() == true) { // Verifica se o jogador ativo é o jogador 1
+                int rodada = j[0].getRodada();
+                double vida = p[0].getVida();
+                double recompensa = j[0].getRecompensa();
+                vida = vida - (0.5 * rodada); // A porcentagem de vida perdida aumenta a cada rodada
+                if (vida <= 0) {
+                    int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
+                    if (continuar == JOptionPane.YES_OPTION) {
+                        vida = j[0].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
+                        p[0].setVida(vida); // Setando nova vida do personagem
+                        j[0].setJogadorRodada(false); // Setando Jogador 2 como proxímo a 
+                        j[1].setJogadorRodada(true);
+                        //Chamar proxíma pergunta
+                        
+                    } else {
+                        // Fim de GAME
+                        //Redirecionar para tela de Resultados
+                    }
+                }
+            } else {
+                int rodada = j[1].getRodada();
+                double vida = p[1].getVida();
+                double recompensa = j[1].getRecompensa();
+                vida = vida - (0.5 * rodada);  // A porcentagem de vida perdida aumenta a cada rodada
+                if (vida <= 0) {
+                    int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
+                    if (continuar == JOptionPane.YES_OPTION) {
+                        vida = j[1].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
+                        p[1].setVida(vida); // Setando nova vida do personagem
+                        j[1].setJogadorRodada(false); // Setando Jogador 1 como proxímo a jogar
+                        j[0].setJogadorRodada(true);
+                    } else {
+                        //Fim de GAME
+                        //Redirecionar para tela de Resultados
+                    }
+                }
+            }
         }
 
     }//GEN-LAST:event_btnResponderActionPerformed

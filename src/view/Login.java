@@ -1,4 +1,3 @@
-
 package view;
 
 import Classes.Usuario;
@@ -140,41 +139,32 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public static String ValidarLogin(String login, String senha) throws IOException {
-
-        Usuario user = new Usuario();
-        UsuarioDAO US = new UsuarioDAO();
-        user = US.VerificaLogin(login, senha);
-        if(user != null)
-            return user.getNome();
-        else
-            return null;
-    }
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         try {
-           
+            Usuario user = new Usuario();
+            UsuarioDAO US = new UsuarioDAO();
+
             //Pega valores digitados na tela
             String login = txtLogin.getText();
             String senha = txtSenha.getText();
             //Função para validar login
-            String validar = ValidarLogin(login, senha);
-
-            if (validar != null) {
-                JOptionPane.showMessageDialog(null, "Bem-Vindo, " + validar);
+            boolean check = US.checkLogin(login, senha);
+            if (check == true) {
+                
+                JOptionPane.showMessageDialog(null, "Bem-Vindo, nome ");
                 TelaPrincipal TP = new TelaPrincipal();
                 TP.setVisible(true);
                 dispose();
 
             } else {
-                 TelaPrincipal TP = new TelaPrincipal();
+                TelaPrincipal TP = new TelaPrincipal();
                 TP.setVisible(true);
                 dispose();
             }
         } catch (Exception e) {
-            
-            JOptionPane.showMessageDialog(null, "Erro ao validar seu acesso!","Erro", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Erro ao validar seu acesso!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
 

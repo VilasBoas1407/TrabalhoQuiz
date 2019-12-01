@@ -10,9 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import Classes.Usuario;
 
 /**
@@ -21,93 +20,34 @@ import Classes.Usuario;
  */
 public class UsuarioDAO {
 
-    private Connection connection;
-    private int idC;
-    private String cpfC, nomeC, rgC, telefoneC, emailC;
-    PreparedStatement ps;
+    public boolean checkLogin(String login, String senha) {
 
-    public UsuarioDAO() {
-        this.connection = null;
-        this.ps = null;
-    }
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-    public ArrayList ListarUsuarios() {
-        String sql = "SELECT * FROM Usuario";
-        ArrayList<Usuario> listUsuarios = new ArrayList();
-        ResultSet rset = null;
+        boolean check = false;
 
         try {
-            this.connection = (Connection) new ConnectionFactory().getConnection();
-            ps = connection.prepareStatement(sql);
-            rset = ps.executeQuery();
-            while (rset.next()) {
-                Usuario u = new Usuario();
-                u.setId(rset.getInt("ID"));
-                u.setNome(rset.getString("NOME"));
-                u.setLogin(rset.getString("LOGIN"));
-                u.setSenha(rset.getString("SENHA"));
-                u.setFl_admin(rset.getBoolean("FL_ADMIN"));
-                listUsuarios.add(u);
+
+            stmt = con.prepareStatement("SELECT * FROM Usuario WHERE LOGIN = ? and SENHA = ?");
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                check = true;
             }
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao ler clientes no banco de dados!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-
-            try {
-                if (rset != null) {
-                    rset.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão do banco de dados!", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return listUsuarios;
-    }
 
-    public Usuario VerificaLogin(String login, String senha) {
-        String sql = "SELECT * FROM usuario WHERE LOGIN =" + login +" AND SENHA = " + senha;
-        Usuario user = new Usuario();
-        ResultSet rset = null;
+        return check;
 
-        try {
-            this.connection = (Connection) new ConnectionFactory().getConnection();
-            ps = connection.prepareStatement(sql);
-            rset = ps.executeQuery();
-            while (rset.next()) {
-                Usuario u = new Usuario();
-                u.setId(rset.getInt("ID"));
-                u.setNome(rset.getString("NOME"));
-                u.setLogin(rset.getString("LOGIN"));
-                u.setSenha(rset.getString("SENHA"));
-                u.setFl_admin(rset.getBoolean("FL_ADMIN"));
-                user = u;
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao ler clientes no banco de dados!", "Erro", JOptionPane.ERROR_MESSAGE);
-        } finally {
-
-            try {
-                if (rset != null) {
-                    rset.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão do banco de dados!", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        return user;
     }
 }

@@ -106,4 +106,13 @@ public class Jogador {
     public void setJogadorRodada(boolean jogador_da_rodada) {
         this.jogador_da_rodada = jogador_da_rodada;
     }
+    
+    public double ComprarVida(double recompensa){
+        double nova_vida = 0,numero_vidas = 0;
+        numero_vidas = recompensa/50;
+        nova_vida = numero_vidas * 10;
+        recompensa = recompensa - (numero_vidas * 50);
+        this.recompensa = recompensa; // Setando o que sobrou da recompensa do jogador
+        return nova_vida;
+    }
 }
