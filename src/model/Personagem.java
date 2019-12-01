@@ -24,16 +24,18 @@ public class Personagem {
     public static Personagem getInstance() {
         return personagem;
     }
+
     // Retorna dados do personagem do Jogador 2
     public static Personagem getInstance2() {
         return personagem2;
     }
 
     public static Personagem CreateInstance() {
-        if(personagem == null)
+        if (personagem == null) {
             return personagem = new Personagem();
-        else
+        } else {
             return personagem2 = new Personagem();
+        }
     }
 
     public Jogador getJ() {
@@ -58,6 +60,23 @@ public class Personagem {
 
     public void setVida(double vida) {
         this.vida = vida;
+    }
+
+    public String GetPersonagem(String nomeP1) {
+        //Fazer switch para pegar o personagem
+        switch (nomeP1) {
+            case "Blinky":
+                break;
+            case "Clyde":
+                break;
+            case "Pinky":
+                break;
+            case "Pac":
+                break;
+            case "Inky":
+                break;
+        }
+        return null;
     }
 
 }

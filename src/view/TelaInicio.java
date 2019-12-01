@@ -8,6 +8,8 @@ package view;
 import model.Jogador;
 import model.Personagem;
 import java.util.Random;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,15 +25,21 @@ public class TelaInicio extends javax.swing.JFrame {
      * Creates new form TelaSelecionar
      */
     public TelaInicio() {
+        initComponents();
         //j[0] - Jogador 1
         //j[1] - Jogador 2
         j[0] = Jogador.getInstance();
         j[1] = Jogador.getInstance2();
-        initComponents();
+        p[0] = Personagem.getInstance();
+        String nomeP1 = p[0].getNome();
+        p[0].GetPersonagem(nomeP1);
+        Icon icon = new ImageIcon("../images/f3.png");
         txtNomeJ1.setText(j[0].getNome());
         txtApelidoJ1.setText(j[0].getApelido());
         J2Nome.setText(j[1].getNome());
         J2Apelido.setText(j[1].getApelido());
+        personagemJ1.setIcon(icon);
+
     }
 
     /**
@@ -44,6 +52,7 @@ public class TelaInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         btnComeca = new javax.swing.ButtonGroup();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,15 +69,31 @@ public class TelaInicio extends javax.swing.JFrame {
         jRPar = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jRImpar = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        personagemJ1 = new javax.swing.JLabel();
+        personagemJ2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jogador 1");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Jogador 1:");
@@ -81,6 +106,8 @@ public class TelaInicio extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/quiz.png"))); // NOI18N
 
+        btnComecar.setBackground(new java.awt.Color(255, 18, 61));
+        btnComecar.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         btnComecar.setText("Sortear");
         btnComecar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +117,7 @@ public class TelaInicio extends javax.swing.JFrame {
 
         txtNomeJ1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        txtApelidoJ1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtApelidoJ1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Jogador 2:");
@@ -103,7 +130,7 @@ public class TelaInicio extends javax.swing.JFrame {
 
         J2Nome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        J2Apelido.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        J2Apelido.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jRPar.setBackground(new java.awt.Color(255, 255, 255));
         btnComeca.add(jRPar);
@@ -120,11 +147,17 @@ public class TelaInicio extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/VS.png"))); // NOI18N
+
+        personagemJ1.setText("jLabel8");
+
+        personagemJ2.setText("jLabel8");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -149,7 +182,7 @@ public class TelaInicio extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtNomeJ1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                        .addComponent(txtNomeJ1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                                         .addGap(201, 201, 201)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -169,7 +202,13 @@ public class TelaInicio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(personagemJ1)
+                .addGap(145, 145, 145)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(161, 161, 161)
+                .addComponent(personagemJ2)
+                .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +239,7 @@ public class TelaInicio extends javax.swing.JFrame {
                                     .addComponent(J2Apelido, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(label)
                                     .addComponent(txtApelidoJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,9 +250,23 @@ public class TelaInicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRPar)
                     .addComponent(jRImpar))
-                .addGap(124, 124, 124)
-                .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(193, 193, 193))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(114, 114, 114))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(personagemJ1)
+                                .addGap(227, 227, 227))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(personagemJ2)
+                                .addGap(226, 226, 226))))))
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/house (1).png"))); // NOI18N
@@ -345,7 +398,9 @@ public class TelaInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -354,6 +409,8 @@ public class TelaInicio extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRImpar;
     private javax.swing.JRadioButton jRPar;
     private javax.swing.JLabel label;
+    private javax.swing.JLabel personagemJ1;
+    private javax.swing.JLabel personagemJ2;
     private javax.swing.JLabel txtApelidoJ1;
     private javax.swing.JLabel txtNomeJ1;
     private javax.swing.JLabel txtNomeJ2;
