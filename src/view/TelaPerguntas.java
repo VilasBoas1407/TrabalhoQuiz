@@ -5,9 +5,10 @@
  */
 package view;
 
-import Classes.Jogador;
-import Classes.Perguntas;
-import Classes.Personagem;
+import dao.PerguntaDAO;
+import model.Jogador;
+import model.Perguntas;
+import model.Personagem;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,7 +19,11 @@ import java.io.LineNumberReader;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import model.Respostas;
 
 /**
  *
@@ -36,7 +41,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
     public TelaPerguntas() {
         initComponents();
         try {
-            PreencherQuestoes();
+            ListarQuestoes();
         } catch (Exception e) {
         }
         j[0] = Jogador.getInstance();
@@ -53,65 +58,46 @@ public class TelaPerguntas extends javax.swing.JFrame {
         } else {
             txtJogador.setText(j[1].getApelido());
         }
+        btnAvancar.setVisible(false);
 
     }
 
-    //Função que lê as questões, do arquivo perguntas.csv e preenche o objeto perguntas
-    public void PreencherQuestoes() throws FileNotFoundException, IOException {
+    public void ListarQuestoes() {
+        j[0] = Jogador.getInstance();
+        //Nosso contador de rodada, usamos para percorrer o vetor de perguntas
+        int rodada = j[0].getRodada();
+        rodada = rodada - 1;
+        //Declarando PerguntaDAO, classe onde está nossas consultas no banco
+        PerguntaDAO p = new PerguntaDAO();
+        //Array List, para preencher um mesmo objeto, com varios valores
+        List<Perguntas> perguntas = new ArrayList<>();
+        //Chamando nosso metodo de consulta de PerguntaDAO
+        perguntas = p.ListaPerguntas();
+        //Preenchendo o label de Pergunta
+        txtPergunta.setText(perguntas.get(rodada).getEnunciado());
 
-        //Pega o diretório do projeto
-        String caminho = System.getProperty("user.dir") + "/perguntas.csv";
-        LineNumberReader lineCounter = new LineNumberReader(new InputStreamReader(new FileInputStream(caminho)));
-        String nextLine = null;
-
-        while ((nextLine = lineCounter.readLine()) != null) {
-            if (nextLine == null) {
-                break;
+        int ID_QUESTAO = (perguntas.get(rodada).getID());
+        List<Respostas> respostas = p.ListarRespostas(ID_QUESTAO);
+        //For para percorrer o vetor de respostas
+        for (int i = 0; i < respostas.size(); i++) {
+            String alternativa = respostas.get(i).getALTERNATIVA();
+            //Switch setando o texto do label de acordo com a alternativa
+            switch (alternativa) {
+                case "A":
+                    txtEnun1.setText(respostas.get(i).getDS_ALTERNATIVA());
+                    break;
+                case "B":
+                    txtEnun2.setText(respostas.get(i).getDS_ALTERNATIVA());
+                    break;
+                case "C":
+                    txtEnun3.setText(respostas.get(i).getDS_ALTERNATIVA());
+                    break;
+                case "D":
+                    txtEnun4.setText(respostas.get(i).getDS_ALTERNATIVA());
+                    break;
             }
-            System.out.println(nextLine);
         }
-        //Pega o número de linhas, para poder criar o array de perguntas
-        int num_perguntas = lineCounter.getLineNumber();
 
-        Perguntas p[] = new Perguntas[num_perguntas];
-
-        FileReader arq = new FileReader(caminho);
-        BufferedReader lerArq = new BufferedReader(arq);
-        boolean valido = false;
-
-        for (int i = 0; i < num_perguntas; i++) {
-            p[i] = new Perguntas();
-
-            /*Criando array para mostrar perguntas,sendo:
-            [0] - Enunciado da questão
-            [1] - AlternativaA
-            [2] - AlternativaB
-            [3] - AlternativaC
-            [4] - AlternaticaD
-            [5] - Resposta*/
-            String array[] = new String[5];
-            String linha = lerArq.readLine();
-            array = linha.split(";");
-            p[i].setEnunciado(array[0]);
-            p[i].setRespA(array[1]);
-            p[i].setRespB(array[2]);
-            p[i].setRespC(array[3]);
-            p[i].setRespD(array[4]);
-            p[i].setSolucao(array[5]);
-
-        }
-        txtPergunta.setText(String.valueOf(p[0].getEnunciado()));
-        txtEnun1.setText(String.valueOf(p[0].getRespA()));
-        txtEnun2.setText(String.valueOf(p[0].getRespB()));
-        txtEnun3.setText(String.valueOf(p[0].getRespC()));
-        txtEnun4.setText(String.valueOf(p[0].getRespD()));
-
-    }
-
-    public static ByteBuffer toByteBuffer(String content, String encode) {
-        Charset charset = Charset.forName(encode);
-        ByteBuffer bb = charset.encode(content);
-        return bb;
     }
 
     @SuppressWarnings("unchecked")
@@ -133,7 +119,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
         txtEnun3 = new javax.swing.JLabel();
         txtEnun4 = new javax.swing.JLabel();
         btnResponder = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAvancar = new javax.swing.JButton();
         rdResposta1 = new javax.swing.JRadioButton();
         rdResposta2 = new javax.swing.JRadioButton();
         rdResposta3 = new javax.swing.JRadioButton();
@@ -191,15 +177,17 @@ public class TelaPerguntas extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jButton2.setText("Avançar");
+        btnAvancar.setBackground(new java.awt.Color(51, 153, 255));
+        btnAvancar.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnAvancar.setText("Avançar");
 
         btnRespostas.add(rdResposta1);
 
         btnRespostas.add(rdResposta2);
 
         btnRespostas.add(rdResposta3);
+
+        btnRespostas.add(jRadioButton1);
 
         txtEnun1.setText("jLabel5");
 
@@ -250,7 +238,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
                                         .addComponent(txtEnun2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnResponder, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel3)
@@ -317,7 +305,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtEnun2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,91 +342,114 @@ public class TelaPerguntas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResponderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResponderActionPerformed
-        p[0] = Personagem.getInstance();//Buscando informações do jogador 1
-        j[0] = Jogador.getInstance();
-        p[1] = Personagem.getInstance2(); //Buscando informações do jogador 2
-        j[1] = Jogador.getInstance2();
-
-        int alternativa = 0;
-        int resposta = 3;
-        //Verifica qual alternativa o jogador selecionou
-        if (rdResposta1.isSelected()) {
-            alternativa = 1;
-        } else if (rdResposta2.isSelected()) {
-            alternativa = 2;
-        } else if (rdResposta3.isSelected()) {
-            alternativa = 3;
-        } else {
-            alternativa = 4;
-        }
-
-        //Validação da resposta e aplicação da recompensa ou punição
-        if (alternativa == resposta) {
-            JOptionPane.showMessageDialog(null, "Parabéns,você acertou!!", "Parabéns", JOptionPane.INFORMATION_MESSAGE);
-            if (j[0].GetJogadorRodada() == true) {
-                double recompensa = j[0].getRecompensa();
-                int rodada = j[0].getRodada();
-                if (recompensa == 0) {
-                    recompensa = 10;
-                }
-                recompensa = recompensa + (0.5 * rodada);
-                j[0].setRecompensa(recompensa);
-                rodada += 1;
-                j[0].setRodada(rodada);
-                j[1].setRodada(rodada);
-            } else {
-                double recompensa = j[1].getRecompensa();
-                int rodada = j[1].getRodada();
-                if (recompensa == 0) {
-                    recompensa = 10;
-                }
-                recompensa = recompensa + (0.5 * rodada);
-                j[1].setRecompensa(recompensa);
-                rodada += 1;
-                j[0].setRodada(rodada);
-                j[1].setRodada(rodada);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Você errou seu cocô", "Parabéns", JOptionPane.ERROR_MESSAGE);
-            if (j[0].GetJogadorRodada() == true) { // Verifica se o jogador ativo é o jogador 1
-                int rodada = j[0].getRodada();
-                double vida = p[0].getVida();
-                double recompensa = j[0].getRecompensa();
-                vida = vida - (0.5 * rodada); // A porcentagem de vida perdida aumenta a cada rodada
-                if (vida <= 0) {
-                    int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
-                    if (continuar == JOptionPane.YES_OPTION) {
-                        vida = j[0].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
-                        p[0].setVida(vida); // Setando nova vida do personagem
-                        j[0].setJogadorRodada(false); // Setando Jogador 2 como proxímo a 
-                        j[1].setJogadorRodada(true);
-                        //Chamar proxíma pergunta
-                        
-                    } else {
-                        // Fim de GAME
-                        //Redirecionar para tela de Resultados
-                    }
-                }
-            } else {
-                int rodada = j[1].getRodada();
-                double vida = p[1].getVida();
-                double recompensa = j[1].getRecompensa();
-                vida = vida - (0.5 * rodada);  // A porcentagem de vida perdida aumenta a cada rodada
-                if (vida <= 0) {
-                    int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
-                    if (continuar == JOptionPane.YES_OPTION) {
-                        vida = j[1].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
-                        p[1].setVida(vida); // Setando nova vida do personagem
-                        j[1].setJogadorRodada(false); // Setando Jogador 1 como proxímo a jogar
-                        j[0].setJogadorRodada(true);
-                    } else {
-                        //Fim de GAME
-                        //Redirecionar para tela de Resultados
-                    }
+        int confimar = JOptionPane.showConfirmDialog(null, "Você tem certeza da resposta ?", "Confirmar resposta", JOptionPane.INFORMATION_MESSAGE);
+        if (confimar == JOptionPane.YES_OPTION) {
+            btnResponder.setEnabled(false);
+            btnAvancar.setVisible(true);
+            p[0] = Personagem.getInstance();//Buscando informações do jogador 1
+            j[0] = Jogador.getInstance();
+            p[1] = Personagem.getInstance2(); //Buscando informações do jogador 2
+            j[1] = Jogador.getInstance2();
+            int rodada = 0;
+            // Gambiarra 
+            if (rodada != 0) {
+                if (j[0].GetJogadorRodada() == true) {
+                    rodada = j[0].getRodada();
+                } else {
+                    rodada = j[1].getRodada();
                 }
             }
-        }
 
+            //Declarando PerguntaDAO, classe onde está nossas consultas no banco
+            PerguntaDAO pe = new PerguntaDAO();
+            //Array List, para preencher um mesmo objeto, com varios valores
+            List<Perguntas> perguntas = new ArrayList<>();
+            //Chamando nosso metodo de consulta de PerguntaDAO
+            perguntas = pe.ListaPerguntas();
+
+            String alternativa = "";
+
+            String resposta = (perguntas.get(rodada).getSolucao());
+            //Verifica qual alternativa o jogador selecionou
+            if (rdResposta1.isSelected()) {
+                alternativa = "A";
+            } else if (rdResposta2.isSelected()) {
+                alternativa = "B";
+            } else if (rdResposta3.isSelected()) {
+                alternativa = "C";
+            } else {
+                alternativa = "D";
+            }
+
+            //Validação da resposta e aplicação da recompensa ou punição
+            if (alternativa.equals(resposta)) {
+                JOptionPane.showMessageDialog(null, "Parabéns,você acertou!!", "Parabéns", JOptionPane.INFORMATION_MESSAGE);
+                if (j[0].GetJogadorRodada() == true) {
+                    double recompensa = j[0].getRecompensa();
+                    if (recompensa == 0) {
+                        recompensa = 10;
+                    }
+                    recompensa = recompensa + (0.5 * rodada);
+                    j[0].setRecompensa(recompensa);
+                    rodada += 1;
+                    j[0].setRodada(rodada);
+                    j[1].setRodada(rodada);
+                } else {
+                    double recompensa = j[1].getRecompensa();
+                    if (recompensa == 0) {
+                        recompensa = 10;
+                    }
+                    recompensa = recompensa + (0.5 * rodada);
+                    j[1].setRecompensa(recompensa);
+                    rodada += 1;
+                    j[0].setRodada(rodada);
+                    j[1].setRodada(rodada);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Você errou !", "Vishhh", JOptionPane.ERROR_MESSAGE);
+                if (j[0].GetJogadorRodada() == true) { // Verifica se o jogador ativo é o jogador 1
+
+                    double recompensa = j[0].getRecompensa();
+                    double vida = p[0].getVida();
+                    vida = vida - (0.5 * rodada); // A porcentagem de vida perdida aumenta a cada rodada
+                    JLabel txtPontosJ1 = new JLabel();
+                    txtPontosJ1.setText(String.valueOf(vida));
+                    if (vida <= 0) {
+                        int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
+                        if (continuar == JOptionPane.YES_OPTION) {
+                            vida = j[0].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
+                            p[0].setVida(vida); // Setando nova vida do personagem
+                            j[0].setJogadorRodada(false); // Setando Jogador 2 como proxímo a 
+                            j[1].setJogadorRodada(true);
+                            //Chamar proxíma pergunta
+
+                        } else {
+                            // Fim de GAME
+                            //Redirecionar para tela de Resultados
+                        }
+                    }
+                } else {
+
+                    double vida = p[1].getVida();
+                    double recompensa = j[1].getRecompensa();
+                    vida = vida - (0.5 * rodada);  // A porcentagem de vida perdida aumenta a cada rodada
+                    JLabel txtPontoJ2 = new JLabel();
+                    txtPontoJ2.setText(String.valueOf(vida));;
+                    if (vida <= 0) {
+                        int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
+                        if (continuar == JOptionPane.YES_OPTION) {
+                            vida = j[1].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
+                            p[1].setVida(vida); // Setando nova vida do personagem
+                            j[1].setJogadorRodada(false); // Setando Jogador 1 como proxímo a jogar
+                            j[0].setJogadorRodada(true);
+                        } else {
+                            //Fim de GAME
+                            //Redirecionar para tela de Resultados
+                        }
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnResponderActionPerformed
 
     private void txtPerguntaComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_txtPerguntaComponentResized
@@ -481,9 +492,9 @@ public class TelaPerguntas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvancar;
     private javax.swing.JButton btnResponder;
     private javax.swing.ButtonGroup btnRespostas;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

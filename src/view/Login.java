@@ -1,6 +1,6 @@
 package view;
 
-import Classes.Usuario;
+import model.Usuario;
 import dao.UsuarioDAO;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -151,8 +151,9 @@ public class Login extends javax.swing.JFrame {
             //Função para validar login
             boolean check = US.checkLogin(login, senha);
             if (check == true) {
-                
-                JOptionPane.showMessageDialog(null, "Bem-Vindo, nome ");
+
+                user =  US.GetDados(login, senha);
+                JOptionPane.showMessageDialog(null, "Bem-Vindo, " +  user.getNome());
                 TelaPrincipal TP = new TelaPrincipal();
                 TP.setVisible(true);
                 dispose();

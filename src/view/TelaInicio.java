@@ -5,8 +5,8 @@
  */
 package view;
 
-import Classes.Jogador;
-import Classes.Personagem;
+import model.Jogador;
+import model.Personagem;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
