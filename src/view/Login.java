@@ -159,9 +159,7 @@ public class Login extends javax.swing.JFrame {
                 dispose();
 
             } else {
-                TelaPrincipal TP = new TelaPrincipal();
-                TP.setVisible(true);
-                dispose();
+              JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!!!!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
 

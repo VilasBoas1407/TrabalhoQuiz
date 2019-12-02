@@ -39,7 +39,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
-        teste = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -60,7 +59,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3.setText("Antes de começarmos, vamos as regras :");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("- Os jogadores começam com 1000 pontos de vida.");
+        jLabel4.setText("- Os jogadores começam com 100 pontos de vida.");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("- A cada rodada esse valor aumenta uma certa porcentagem.");
@@ -69,7 +68,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel6.setText("- Caso o jogador erre a resposta, será descontado um valor.");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("- Ao fim das quinze rodadas, vence quem tiver mais pontos.");
+        jLabel7.setText("- Ao fim vence quem tiver mais pontos ou quem chegar a 0 pontos de  vida.");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("- Caso um jogador, zere sua pontuação,ele será eliminado.");
@@ -83,8 +82,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnIniciarActionPerformed(evt);
             }
         });
-
-        teste.setText("jLabel10");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,9 +115,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(teste))
+                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40))
@@ -150,9 +145,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(teste)
-                        .addGap(73, 73, 73)
+                        .addGap(176, 176, 176)
                         .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -287,6 +280,5 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel teste;
     // End of variables declaration//GEN-END:variables
 }

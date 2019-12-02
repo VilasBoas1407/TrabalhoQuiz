@@ -30,6 +30,7 @@ public class TelaSelecionar extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     public void ValidarCampos() { // Verifica se todos os campos foram preenchidos, caso sim ele habilita o botão de proxímo
+        
         if (txtApelido.getText().length() > 0 && txtEmail.getText().length() > 0 && txtNome.getText().length() > 0 && txtNumero.getText().length() > 0) {
             btnProximo.setEnabled(true);
         } else {

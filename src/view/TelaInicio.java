@@ -38,7 +38,8 @@ public class TelaInicio extends javax.swing.JFrame {
         txtApelidoJ1.setText(j[0].getApelido());
         J2Nome.setText(j[1].getNome());
         J2Apelido.setText(j[1].getApelido());
-        personagemJ1.setIcon(icon);
+       if(!jRPar.isSelected() && !jRImpar.isSelected())
+           btnComecar.setEnabled(false);
 
     }
 
@@ -53,6 +54,7 @@ public class TelaInicio extends javax.swing.JFrame {
 
         btnComeca = new javax.swing.ButtonGroup();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        Sortear = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -69,9 +71,6 @@ public class TelaInicio extends javax.swing.JFrame {
         jRPar = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jRImpar = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
-        personagemJ1 = new javax.swing.JLabel();
-        personagemJ2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -133,25 +132,30 @@ public class TelaInicio extends javax.swing.JFrame {
         J2Apelido.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jRPar.setBackground(new java.awt.Color(255, 255, 255));
-        btnComeca.add(jRPar);
+        Sortear.add(jRPar);
         jRPar.setText("Par");
+        jRPar.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRParStateChanged(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Jogador 1 selecione uma opção:");
 
         jRImpar.setBackground(new java.awt.Color(255, 255, 255));
+        Sortear.add(jRImpar);
         jRImpar.setText("Impar");
+        jRImpar.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRImparStateChanged(evt);
+            }
+        });
         jRImpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRImparActionPerformed(evt);
             }
         });
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/VS.png"))); // NOI18N
-
-        personagemJ1.setText("jLabel8");
-
-        personagemJ2.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,13 +206,7 @@ public class TelaInicio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(personagemJ1)
-                .addGap(145, 145, 145)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161)
-                .addComponent(personagemJ2)
-                .addGap(74, 74, 74))
+                .addGap(74, 990, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +237,6 @@ public class TelaInicio extends javax.swing.JFrame {
                                     .addComponent(J2Apelido, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(label)
                                     .addComponent(txtApelidoJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,23 +247,9 @@ public class TelaInicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRPar)
                     .addComponent(jRImpar))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(193, 193, 193))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(114, 114, 114))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(personagemJ1)
-                                .addGap(227, 227, 227))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(personagemJ2)
-                                .addGap(226, 226, 226))))))
+                .addGap(200, 200, 200)
+                .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(193, 193, 193))
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/house (1).png"))); // NOI18N
@@ -287,13 +270,14 @@ public class TelaInicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -351,6 +335,17 @@ public class TelaInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRImparActionPerformed
 
+    private void jRParStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRParStateChanged
+        if(jRPar.isSelected() || jRImpar.isSelected())
+           btnComecar.setEnabled(true);
+
+    }//GEN-LAST:event_jRParStateChanged
+
+    private void jRImparStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRImparStateChanged
+         if(jRPar.isSelected() || jRImpar.isSelected())
+           btnComecar.setEnabled(true);
+    }//GEN-LAST:event_jRImparStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -391,6 +386,7 @@ public class TelaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel J2Apelido;
     private javax.swing.JLabel J2Nome;
+    private javax.swing.ButtonGroup Sortear;
     private javax.swing.ButtonGroup btnComeca;
     private javax.swing.JButton btnComecar;
     private javax.swing.JLabel jLabel1;
@@ -398,7 +394,6 @@ public class TelaInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
@@ -409,8 +404,6 @@ public class TelaInicio extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRImpar;
     private javax.swing.JRadioButton jRPar;
     private javax.swing.JLabel label;
-    private javax.swing.JLabel personagemJ1;
-    private javax.swing.JLabel personagemJ2;
     private javax.swing.JLabel txtApelidoJ1;
     private javax.swing.JLabel txtNomeJ1;
     private javax.swing.JLabel txtNomeJ2;

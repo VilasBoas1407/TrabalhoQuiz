@@ -453,16 +453,23 @@ public class TelaPerguntas extends javax.swing.JFrame {
                     AvancarRodada(true);// A porcentagem de vida perdida aumenta a cada rodada
                     p[0].setVida(vida); // Setando nova vida do personagem
                     if (vida <= 0) {
-                        int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
-                        if (continuar == JOptionPane.YES_OPTION) {
-                            vida = j[0].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
-                            p[0].setVida(vida); // Setando nova vida do personagem
-                            //Chamar proxíma pergunta
-                            AvancarRodada(true);
+                        if (recompensa >= 0) {
+                            int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
+                            if (continuar == JOptionPane.YES_OPTION) {
+                                vida = j[0].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
+                                p[0].setVida(vida); // Setando nova vida do personagem
+                                //Chamar proxíma pergunta
+                                AvancarRodada(true);
 
+                            } else {
+                                TelaFinal tf = new TelaFinal();
+                                tf.setVisible(true);
+                                dispose();
+                            }
                         } else {
-                            // Fim de GAME
-                            //Redirecionar para tela de Resultados
+                            TelaFinal tf = new TelaFinal();
+                            tf.setVisible(true);
+                            dispose();
                         }
                     }
                 } else {
@@ -473,15 +480,22 @@ public class TelaPerguntas extends javax.swing.JFrame {
                     p[1].setVida(vida);
                     AvancarRodada(true);
                     if (vida <= 0) {
-                        int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
-                        if (continuar == JOptionPane.YES_OPTION) {
-                            vida = j[1].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
-                            p[1].setVida(vida); // Setando nova vida do personagem
-                            AvancarRodada(true);
-                        } else {
-                            //Fim de GAME
-                            //Redirecionar para tela de Resultados
+                        if (recompensa >= 0) {
+                            int continuar = JOptionPane.showConfirmDialog(null, "Sua vida chegou ao fim, deseja trocar suas moedas em vida?Você possui: " + recompensa + ", A cada 50 moedas,você restaura 10 de vida.\n Deseja restaurar sua vida total ?");
+                            if (continuar == JOptionPane.YES_OPTION) {
+                                vida = j[1].ComprarVida(recompensa); // Chamando metodo criado na classe jogador
+                                p[1].setVida(vida); // Setando nova vida do personagem
+                                AvancarRodada(true);
+                            } else {
+                                TelaFinal tf = new TelaFinal();
+                                tf.setVisible(true);
+                                dispose();
+                            }
                         }
+                    } else {
+                        TelaFinal tf = new TelaFinal();
+                        tf.setVisible(true);
+                        dispose();
                     }
                 }
             }
