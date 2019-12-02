@@ -42,10 +42,12 @@ public class TelaPerguntas extends javax.swing.JFrame {
         boolean JogadorRodada = j[0].GetJogadorRodada();  // Se falso, jogador 2 joga primeiro
         double vida_jogador = p[0].getVida();
         double vida_jogador2 = p[1].getVida();
+        int vida1 = (int) vida_jogador;
+        int vida2 = (int) vida_jogador2;
+        progJ1.setValue(vida1);
+        jProgressBar1.setValue(vida2);
         txtNomeJ1.setText(j[0].getApelido());
-        txtPontosJ1.setText(String.valueOf(vida_jogador));
         txtNomeJ2.setText(j[1].getApelido());
-        txtPontoJ2.setText(String.valueOf(vida_jogador2));
         if (JogadorRodada == true) {
             txtJogador.setText(j[0].getApelido());
         } else {
@@ -121,9 +123,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
         btnRespostas = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txtNomeJ1 = new javax.swing.JLabel();
-        txtPontosJ1 = new javax.swing.JLabel();
         txtNomeJ2 = new javax.swing.JLabel();
-        txtPontoJ2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtJogador = new javax.swing.JLabel();
         txtPersonagem = new javax.swing.JLabel();
@@ -140,6 +140,9 @@ public class TelaPerguntas extends javax.swing.JFrame {
         txtEnun1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPergunta = new javax.swing.JTextArea();
+        progJ1 = new javax.swing.JProgressBar();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        btnDesistir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -152,12 +155,8 @@ public class TelaPerguntas extends javax.swing.JFrame {
         txtNomeJ1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtNomeJ1.setText("Jogador 1:");
 
-        txtPontosJ1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
         txtNomeJ2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtNomeJ2.setText("Jogador 2:");
-
-        txtPontoJ2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Vez de ");
@@ -208,6 +207,22 @@ public class TelaPerguntas extends javax.swing.JFrame {
         txtPergunta.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtPergunta);
 
+        progJ1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        progJ1.setToolTipText("");
+        progJ1.setStringPainted(true);
+
+        jProgressBar1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jProgressBar1.setStringPainted(true);
+
+        btnDesistir.setBackground(java.awt.Color.red);
+        btnDesistir.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnDesistir.setText("Desistir");
+        btnDesistir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesistirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -238,7 +253,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txtEnun1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 73, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rdResposta2)
@@ -247,82 +262,84 @@ public class TelaPerguntas extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnResponder, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDesistir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(84, 84, 84)
-                                .addComponent(txtPersonagem)
-                                .addGap(518, 518, 518)
-                                .addComponent(txtNomeJ1))
-                            .addComponent(txtNomeJ2))
-                        .addGap(24, 24, 24)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(txtPersonagem)
+                        .addGap(382, 382, 382)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(txtPontoJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPontosJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 12, Short.MAX_VALUE)))))
+                            .addComponent(txtNomeJ2)
+                            .addComponent(txtNomeJ1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(progJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPersonagem))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPontoJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
+                        .addGap(91, 91, 91))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtNomeJ1)
+                                .addGap(9, 9, 9))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(progJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeJ2))
+                        .addGap(57, 57, 57)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNomeJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPontosJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNomeJ2)
-                        .addGap(337, 337, 337)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(rdResposta1)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtEnun1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(rdResposta2)
-                        .addGap(71, 71, 71)
-                        .addComponent(rdResposta3)
-                        .addGap(52, 52, 52)
-                        .addComponent(rdResposta4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btnResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txtEnun2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtEnun3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEnun4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(rdResposta1)
+                                .addGap(46, 46, 46))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtEnun1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(rdResposta2)
+                                .addGap(71, 71, 71)
+                                .addComponent(rdResposta3)
+                                .addGap(52, 52, 52)
+                                .addComponent(rdResposta4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(txtEnun2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtEnun3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEnun4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(303, 303, 303)
+                        .addComponent(btnResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnDesistir, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuBar1.setName(""); // NOI18N
@@ -365,8 +382,10 @@ public class TelaPerguntas extends javax.swing.JFrame {
         int rodada = Jogo.getRod_perguntas();
         double vida_jogador = p[0].getVida();
         double vida_jogador2 = p[1].getVida();
-        txtPontosJ1.setText(String.valueOf(vida_jogador));
-        txtPontoJ2.setText(String.valueOf(vida_jogador2));
+        int vida1 = (int) vida_jogador;
+        int vida2 = (int) vida_jogador2;
+        progJ1.setValue(vida1);
+        jProgressBar1.setValue(vida2);
         ListarQuestoes(rodada);
         btnResponder.setVisible(true);
     }//GEN-LAST:event_btnAvancarActionPerformed
@@ -426,7 +445,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
 
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Você errou !", "Vishhh", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Você errou! \n A resposta certa é a :" + resposta, "Vishhh", JOptionPane.ERROR_MESSAGE);
                 if (j[0].GetJogadorRodada() == true) { // Verifica se o jogador ativo é o jogador 1
                     double recompensa = j[0].getRecompensa();
                     double vida = p[0].getVida();
@@ -469,6 +488,22 @@ public class TelaPerguntas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnResponderActionPerformed
 
+    private void btnDesistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesistirActionPerformed
+        int desistir = JOptionPane.showConfirmDialog(null, "Você tem certeza que quer desistir ?", "Sair do jogo", JOptionPane.ERROR_MESSAGE);
+        if (desistir == JOptionPane.YES_OPTION) {
+            if (j[0].GetJogadorRodada() == true) {
+                j[0].setVencedor(false);
+                j[1].setVencedor(true);
+            } else {
+                j[0].setVencedor(true);
+                j[1].setVencedor(false);
+            }
+            TelaFinal tf = new TelaFinal();
+            tf.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_btnDesistirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -506,6 +541,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvancar;
+    private javax.swing.JButton btnDesistir;
     private javax.swing.JButton btnResponder;
     private javax.swing.ButtonGroup btnRespostas;
     private javax.swing.JLabel jLabel3;
@@ -514,7 +550,9 @@ public class TelaPerguntas extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JProgressBar progJ1;
     private javax.swing.JRadioButton rdResposta1;
     private javax.swing.JRadioButton rdResposta2;
     private javax.swing.JRadioButton rdResposta3;
@@ -528,7 +566,5 @@ public class TelaPerguntas extends javax.swing.JFrame {
     private javax.swing.JLabel txtNomeJ2;
     private javax.swing.JTextArea txtPergunta;
     private javax.swing.JLabel txtPersonagem;
-    private javax.swing.JLabel txtPontoJ2;
-    private javax.swing.JLabel txtPontosJ1;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,8 +17,16 @@ public class Jogador {
     String nome, apelido, email, telefone, personagem;
     double recompensa;
     int rodada;
-    boolean jogador_da_rodada; // Seta true ou false para saber quem inicio o jogo
+    boolean jogador_da_rodada, vencedor; // Seta true ou false para saber quem inicio o jogo
     private static Jogador instance, instancej2;
+
+    public boolean isVencedor() {
+        return vencedor;
+    }
+
+    public void setVencedor(boolean vencedor) {
+        this.vencedor = vencedor;
+    }
 
     public int getRodada() {
         return rodada;
