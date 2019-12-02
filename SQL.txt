@@ -1,0 +1,41 @@
+create table Usuario(
+ID int not null auto_increment,
+NOME varchar(150) not null,
+LOGIN  varchar(30) not null,
+SENHA varchar(30) not null,
+FL_ADMIN bit not null,
+primary key(ID));
+
+create table Perguntas(
+ID int not null auto_increment,
+DS_ENUNCIADO text not null,
+DS_ALTERNATIVA char not null,
+primary key(ID));
+
+
+create table Respostas(
+ID_ALTERNATIVA int not null auto_increment,
+DS_ALTERNATIVA text not null,
+ALTERNATIVA char not null,
+ID_QUESTAO int not null,
+foreign key (ID_QUESTAO) references Perguntas(ID),
+primary key(ID_ALTERNATIVA));
+
+insert into Perguntas(ID,DS_ENUNCIADO,DS_ALTERNATIVA) values(null,'Um aluno chamado Roberto do curso de Ciência da Computação efetua matrícula nas disciplinas de Matemática, Banco de Dados e Programação. Quais são os objetos da sentença?','B')
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'a.	Aluno, curso, matrícula e disciplina.', 'A' ,'1');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'b.	Roberto, Ciência da Computação, Matemática, Banco de Dados e Programação.','B','1');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'c.	Roberto, Ciência da Computação e disciplinas.','C','1');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'c.	Roberto, Ciência da Computação e disciplinas.','D','1');
+
+
+insert into Perguntas(ID,DS_ENUNCIADO,DS_ALTERNATIVA) values(null,'2.	Relacione os conceitos com seus respectivos nomes. \n a. Características pertencentes a um objeto. \n b. Procedimentos ou funções que realizam as ações do objeto. \n c. Evita o acesso direto as propriedades do objeto. \n d.Coleção de objetos com características similares.','A')
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'a. Atributo, Método, Encapsulamento, Classe.', 'A' ,'2');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'b.	Métodos, Atributo, Classe, Encapsulamento.','B','2');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'c.	Encapsulamento, Atributo, Classe, Método.','C','2');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'d.	Encapsulamento, Classe, Método, Atributo.','D','2');
+
+insert into Perguntas(ID,DS_ENUNCIADO,DS_ALTERNATIVA) values(null,'O que é INSTÂNCIA?','C');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'a.	O ato de um grupo criar um novo objeto.', 'A' ,'4');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'b. O ato de um objeto criar um novo objeto','B','4');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'c. O ato de uma classe criar um novo objeto..','C','4');
+insert into Respostas(ID_ALTERNATIVA,DS_ALTERNATIVA,ALTERNATIVA,ID_QUESTAO) values(null,'d.	O ato de uma classe criar uma nova classe.','D','4');
